@@ -1,0 +1,77 @@
+### OpenClaw 2026.11.10 (497c0d9)
+### control: run B requested 2 s before the reload time, queued behind run A; no reload
+-- 04:42:10.637 run B starts
+-- run A: 10/10 tool calls ok   run B: 10/10 tool calls ok
+
+### MCP loopback, per run: each tools/call request and the Gateway's response (from mcp-trace.jsonl)
+run A (CLI session b32c4204):
+  04:42:09.571 POST /mcp 200 tools/call probe_tick {"n": 1} -> isError=false "tick 1 ok"
+  04:42:11.082 POST /mcp 200 tools/call probe_tick {"n": 2} -> isError=false "tick 2 ok"
+  04:42:12.592 POST /mcp 200 tools/call probe_tick {"n": 3} -> isError=false "tick 3 ok"
+  04:42:14.105 POST /mcp 200 tools/call probe_tick {"n": 4} -> isError=false "tick 4 ok"
+  04:42:15.617 POST /mcp 200 tools/call probe_tick {"n": 5} -> isError=false "tick 5 ok"
+  04:42:17.126 POST /mcp 200 tools/call probe_tick {"n": 6} -> isError=false "tick 6 ok"
+  04:42:18.637 POST /mcp 200 tools/call probe_tick {"n": 7} -> isError=false "tick 7 ok"
+  04:42:20.147 POST /mcp 200 tools/call probe_tick {"n": 8} -> isError=false "tick 8 ok"
+  04:42:21.658 POST /mcp 200 tools/call probe_tick {"n": 9} -> isError=false "tick 9 ok"
+  04:42:23.166 POST /mcp 200 tools/call probe_tick {"n": 10} -> isError=false "tick 10 ok"
+run B (CLI session 688ad555):
+  04:42:23.270 POST /mcp 200 tools/call probe_tick {"n": 1} -> isError=false "tick 1 ok"
+  04:42:24.781 POST /mcp 200 tools/call probe_tick {"n": 2} -> isError=false "tick 2 ok"
+  04:42:26.291 POST /mcp 200 tools/call probe_tick {"n": 3} -> isError=false "tick 3 ok"
+  04:42:27.802 POST /mcp 200 tools/call probe_tick {"n": 4} -> isError=false "tick 4 ok"
+  04:42:29.312 POST /mcp 200 tools/call probe_tick {"n": 5} -> isError=false "tick 5 ok"
+  04:42:30.822 POST /mcp 200 tools/call probe_tick {"n": 6} -> isError=false "tick 6 ok"
+  04:42:35.746 POST /mcp 200 tools/call probe_tick {"n": 7} -> isError=false "tick 7 ok"
+  04:42:37.256 POST /mcp 200 tools/call probe_tick {"n": 8} -> isError=false "tick 8 ok"
+  04:42:38.767 POST /mcp 200 tools/call probe_tick {"n": 9} -> isError=false "tick 9 ok"
+  04:42:40.278 POST /mcp 200 tools/call probe_tick {"n": 10} -> isError=false "tick 10 ok"
+
+### gateway log (plugin reload, CLI runs, tool errors)
+2026-11-27T04:42:06.463-06:00 [agent/cli-backend] cli turn: provider=probe-cli model=local durationMs=13690 outBytes=19 outHash=f5c4a1a6d52b
+2026-11-27T04:42:23.173-06:00 [agent/cli-backend] cli turn: provider=probe-cli model=local durationMs=13685 outBytes=19 outHash=f5c4a1a6d52b
+2026-11-27T04:42:40.286-06:00 [agent/cli-backend] cli turn: provider=probe-cli model=local durationMs=17112 outBytes=19 outHash=f5c4a1a6d52b
+
+
+### OpenClaw 2026.11.10 (497c0d9)
+### reload: run B requested, queued behind run A; 2 s later: openclaw plugins reload hook-probe
+-- 04:42:44.768 run B starts
+-- 04:42:46.776 reload
+-- 04:42:49.590 reload returned
+-- run A: 10/10 tool calls ok   run B: 10/10 tool calls ok
+
+### MCP loopback, per run: each tools/call request and the Gateway's response (from mcp-trace.jsonl)
+run A (CLI session 95b36199):
+  04:42:43.739 POST /mcp 200 tools/call probe_tick {"n": 1} -> isError=false "tick 1 ok"
+  04:42:45.250 POST /mcp 200 tools/call probe_tick {"n": 2} -> isError=false "tick 2 ok"
+  04:42:46.760 POST /mcp 200 tools/call probe_tick {"n": 3} -> isError=false "tick 3 ok"
+  04:42:48.270 POST /mcp 200 tools/call probe_tick {"n": 4} -> isError=false "tick 4 ok"
+  04:42:49.779 POST /mcp 200 tools/call probe_tick {"n": 5} -> isError=false "tick 5 ok"
+  04:42:51.290 POST /mcp 200 tools/call probe_tick {"n": 6} -> isError=false "tick 6 ok"
+  04:42:52.800 POST /mcp 200 tools/call probe_tick {"n": 7} -> isError=false "tick 7 ok"
+  04:42:54.312 POST /mcp 200 tools/call probe_tick {"n": 8} -> isError=false "tick 8 ok"
+  04:42:55.823 POST /mcp 200 tools/call probe_tick {"n": 9} -> isError=false "tick 9 ok"
+  04:42:57.333 POST /mcp 200 tools/call probe_tick {"n": 10} -> isError=false "tick 10 ok"
+run B (CLI session 00da0889):
+  04:42:59.858 POST /mcp 200 tools/call probe_tick {"n": 1} -> isError=false "tick 1 ok"
+  04:43:01.370 POST /mcp 200 tools/call probe_tick {"n": 2} -> isError=false "tick 2 ok"
+  04:43:02.880 POST /mcp 200 tools/call probe_tick {"n": 3} -> isError=false "tick 3 ok"
+  04:43:04.390 POST /mcp 200 tools/call probe_tick {"n": 4} -> isError=false "tick 4 ok"
+  04:43:05.899 POST /mcp 200 tools/call probe_tick {"n": 5} -> isError=false "tick 5 ok"
+  04:43:07.411 POST /mcp 200 tools/call probe_tick {"n": 6} -> isError=false "tick 6 ok"
+  04:43:08.921 POST /mcp 200 tools/call probe_tick {"n": 7} -> isError=false "tick 7 ok"
+  04:43:10.431 POST /mcp 200 tools/call probe_tick {"n": 8} -> isError=false "tick 8 ok"
+  04:43:11.942 POST /mcp 200 tools/call probe_tick {"n": 9} -> isError=false "tick 9 ok"
+  04:43:13.451 POST /mcp 200 tools/call probe_tick {"n": 10} -> isError=false "tick 10 ok"
+
+### gateway log (plugin reload, CLI runs, tool errors)
+2026-11-27T04:42:40.286-06:00 [agent/cli-backend] cli turn: provider=probe-cli model=local durationMs=17112 outBytes=19 outHash=f5c4a1a6d52b
+2026-11-27T04:42:48.882-06:00 [reload] plugin metadata changed with identical config; applying plugin lifecycle
+2026-11-27T04:42:49.200-06:00 [gateway] Plugin replacement queued behind 2 retained work item(s) for plugin hook-probe. Running turns on hook-probe continue on the new version at their next step. New agent runs wait up t
+2026-11-27T04:42:49.201-06:00 [agents/plugin-turn-handover] plugin hook-probe reload requested; whole-run hold yields to the reload
+2026-11-27T04:42:49.201-06:00 [agents/plugin-turn-handover] plugin hook-probe reload requested; whole-run hold yields to the reload
+2026-11-27T04:42:49.270-06:00 [gateway] Plugin replacement applied: hook-probe
+2026-11-27T04:42:49.493-06:00 [reload] config source revision 1 accepted (file)
+2026-11-27T04:42:49.543-06:00 [ws] ⇄ res ✓ plugins.reload 1236ms bytes=553 conn=e5827360…36d1 id=2:f040ddc4-7…5ee1
+2026-11-27T04:42:57.342-06:00 [agent/cli-backend] cli turn: provider=probe-cli model=local durationMs=13689 outBytes=19 outHash=f5c4a1a6d52b
+2026-11-27T04:43:13.458-06:00 [agent/cli-backend] cli turn: provider=probe-cli model=local durationMs=16116 outBytes=19 outHash=f5c4a1a6d52b
